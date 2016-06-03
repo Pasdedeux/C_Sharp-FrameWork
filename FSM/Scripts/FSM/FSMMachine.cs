@@ -4,7 +4,9 @@ using System.Collections;
 /// 状态机
 /// 使用这个来驱动状态
 /// </summary>
-/// <typeparam name="Entity_type"></typeparam>
+/// <typeparam name="Entity_type">
+/// 泛型限制
+/// </typeparam>
 public class FSMMachine<Entity_type>
 {
     //状态持有对象

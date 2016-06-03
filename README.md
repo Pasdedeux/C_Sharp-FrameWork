@@ -13,7 +13,7 @@ Use to build primary framework
 **FSM/**：`状态机框架`
 
 - **FSMMachine** - *状态机，主要属性及功能：*
-	- **prop 属性**
+	- **Prop 属性**
 		- owner:*当前状态机的持有对象*
 		-  currentState:*当前状态*
 		-  previousState:*上一个状态*
@@ -23,6 +23,13 @@ Use to build primary framework
 		- GetCurrentState:*获取当前状态*
 		- FSMUpdate:*外部调用执行状态*
 		- ChangeState:*改变状态* 
+- **FSMState** - *状态基类*
+	- **Prop 属性**
+		- Entity_type:*当前状态机持有者，用于调用其(上层状态机的持有者)所拥有的方法*
+	- **Func 方法**
+		- virtual Enter:*进入状态的虚方法*
+		- virtual Excute:*执行状态的虚方法*
+		- virtual Exit:*退出状态的虚方法*
 		
 
 

@@ -13,6 +13,7 @@ public class CubeAI : MonoBehaviour {
 
     //状态机对象，用于状态管理
     FSMMachine<CubeAI> m_Machine;
+
     //存放状态映射
     public Dictionary<CubeState, FSMState<CubeAI>> stateDic;
     
