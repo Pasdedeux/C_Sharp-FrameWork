@@ -18,7 +18,9 @@ public class FSMMachine<Entity_type>
     /// <summary>
     /// 状态机构造函数
     /// </summary>
-    /// <param name="owner"></param>
+    /// <param name="owner">
+    /// 状态机的持有对象 CubeAI
+    /// </param>
     public FSMMachine(Entity_type owner)
     {
         s_Owner = owner;
@@ -35,9 +37,9 @@ public class FSMMachine<Entity_type>
     {
         if( currentState != null )
         {
-            //保存 当前状态
+            //保存当前状态
             s_CurrentState = currentState;
-            //设置 状态中的 Target
+            //设置状态中的 Target
             s_CurrentState.Target = s_Owner;
             s_CurrentState.Enter();
         }
@@ -67,11 +69,11 @@ public class FSMMachine<Entity_type>
     /// </summary>
     public void GlobalStateEnter()
     {
-
+        
     }
 
     /// <summary>
-    /// Update 方法
+    /// Update 方法,被外部Update调用
     /// </summary>
     public void FSMUpdate()
     {
@@ -86,7 +88,7 @@ public class FSMMachine<Entity_type>
     }
 
 
-    public void ChangeState( FSMState<Entity_type> newState)
+    public void ChangeState( FSMState<Entity_type> newState )
     {
         if(newState==null)
         {
@@ -105,7 +107,7 @@ public class FSMMachine<Entity_type>
         //将新状态的使用对象设为当前
         s_CurrentState.Target = s_Owner;
 
-        //触发当前状态
+        //转换进入当前状态
         s_CurrentState.Enter();
 
     }

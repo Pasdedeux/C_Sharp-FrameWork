@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//*****************************************
-// 有限状态机
-// 
-// 状态基类
-//
-//*****************************************
-
 /// <summary>
-/// 枚举扩展类
-/// <typeparam name="Entity_type"/>
+/// 有限状态机状态基类
 /// </summary>
+/// <typeparam name="Entity_type">
+/// 泛型类
+/// </typeparam>
 public class FSMState<Entity_type> 
 {
     public Entity_type Target;
@@ -22,9 +17,9 @@ public class FSMState<Entity_type>
     }
 
 
-   /// <summary>
-   /// 执行状态的逻辑
-   /// </summary>
+    /// <summary>
+    /// 执行状态的逻辑
+    /// </summary>
     public virtual void Excute()
     {
 
