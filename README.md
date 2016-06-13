@@ -31,9 +31,11 @@ Use to build primary framework
 		- virtual Excute:*执行状态的虚方法*
 		- virtual Exit:*退出状态的虚方法*
 	
-### ItemPool 对象池 ###	
+### ItemPool 对象池 ###
  - **ItemPool** - *对象池对象*
  - **ItemPoolManager** - *对象池管理*
  - **ItemPoolTime** - *带有效时间的对象池对象*
 
-
+### Singleton 单例接口 ###
+ - **IUnitySingleton** - *Unity 单例接口，直接继承此类，替代Monobehavior*
+ 
