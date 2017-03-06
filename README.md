@@ -38,4 +38,7 @@ Use to build primary framework
 
 ### Singleton 单例接口 ###
  - **IUnitySingleton** - *Unity 单例接口，直接继承此类，替代Monobehavior*
+
+### RaycastReflection 射线反射 ###
+- **RaycastReflection** - *通过这个类可以由本物体发射一条射线，允许碰撞物体产生反射射线及路径*
  
