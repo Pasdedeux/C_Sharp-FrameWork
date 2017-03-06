@@ -1,9 +1,9 @@
-# C_Sharp-FrameWork #
+# C_Sharp-Framework #
 Use to build primary framework
 
-***
 
 ### FSM 有限状态机 ###
+---
 **AI/**：`状态机实例`
 
 - CubeAI - *直接添加至对象，入口执行文件*
@@ -32,6 +32,7 @@ Use to build primary framework
 		- virtual Exit:*退出状态的虚方法*
 	
 ### ItemPool 对象池 ###
+---
  - **ItemPool** - *对象池对象*
  - **ItemPoolManager** - *对象池管理*
  - **ItemPoolTime** - *带有效时间的对象池对象*
@@ -41,4 +42,15 @@ Use to build primary framework
 
 ### RaycastReflection 射线反射 ###
 - **RaycastReflection** - *通过这个类可以由本物体发射一条射线，允许碰撞物体产生反射射线及路径*
+ 
+### Unity 功能脚本 ###
+---
+**Unity/Pattern/**:*设计模式*
+
+**Unity/Mono/**:*Monobehaviour功能代码*
+
+### WordsShield 屏蔽字功能
+---
+
+
  
