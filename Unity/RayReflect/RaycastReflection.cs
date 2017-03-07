@@ -1,26 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent( typeof( LineRenderer ) )]
+[RequireComponent(typeof(LineRenderer))]
 public class RaycastReflection : MonoBehaviour
 {
-    //添加的line renderer组件
-    private LineRenderer _lineRenderer;
+    //需要的反射点数量
+    private int _reflectPoint = 2;
 
-    //一条射线
+    //射入方向/反射方向
+    private Vector3 _reflectDirection;
+
     private Ray _ray;
-
-    //一个RaycastHit类型的变量, 可以得到射线碰撞点的信息
     private RaycastHit _hit;
-
-    //反射的方向
-    private Vector3 _inDirection;
-
-    //反射次数
-    public int nReflections = 1;
-
-    //line renderer组件上点的数量
-    private int _reflectPoint;
+    private LineRenderer _lineRenderer;
 
 
     void Awake( )
@@ -28,84 +20,38 @@ public class RaycastReflection : MonoBehaviour
         _lineRenderer = transform.GetComponent<LineRenderer>();
     }
 
-
     void Update( )
     {
-        //z轴方向
+        //由物体当前位置，朝Z轴发射射线
         _ray = new Ray( transform.position , transform.forward );
 
-        //只有在编辑器的Scene窗口才会看到的射线，用于调试
-        Debug.DrawRay( transform.position , transform.forward * 100 , Color.magenta );
+        //Scene场景中渲染一条射线线条
+        Debug.DrawRay( transform.position , transform.forward * 100 , Color.cyan );
 
-        //将lineRenderer的点数设置成和反射次数相等
-        _reflectPoint = nReflections;
+        //Linerender当前包含的点位数量为 反射点数量+加上一个初始位置
+        _lineRenderer.numPositions = _reflectPoint+1;
 
-        //使lineRenderer有nPoints个点
-        _lineRenderer.numPositions = _reflectPoint;
-
-        //将lineRenderer的第一个点设置为当前物体的位置
+        //设置Linerender中第一个点位为初始位置
         _lineRenderer.SetPosition( 0 , transform.position );
 
-        for ( int i = 0 ; i <= nReflections ; i++ )
+        //有多少点位，就发射多少次射线
+        for ( int i = 0 ; i < _reflectPoint ; i++ )
         {
-            //当射线还没有反射的时候
-            if ( i == 0 )
+            if ( Physics.Raycast( _ray.origin , _ray.direction , out _hit , 100 ) )
             {
-                //检查射线是否碰到了墙壁
-                if ( Physics.Raycast( _ray.origin , _ray.direction , out _hit , 100 ) )
-                {
-                    //反射方向就是当前碰撞点的反射角
-                    _inDirection = Vector3.Reflect( _hit.point , _hit.normal );
+                //将当前射线在碰撞点处根据法线向量反射，得到新的方向向量
+                _reflectDirection = Vector3.Reflect( _ray.direction , _hit.normal );
 
-                    //新建一条射线, 用刚才的碰撞点当做新射线的初始点，用反射方向当做他的发射方向 
-                    _ray = new Ray( _hit.point , _inDirection );
+                //从碰撞点处按照新的方向发射射线
+                _ray = new Ray( _hit.point , _reflectDirection );
 
-                    //调试用信息，绘制法线、射线
-                    Debug.DrawRay( _hit.point , _hit.normal * 3 , Color.blue );
+                //Scene场景下渲染射线线条
+                Debug.DrawRay( _hit.point , _hit.normal * 3 , Color.blue );
+                Debug.DrawRay( _hit.point , _reflectDirection * 100 , Color.cyan );
+                Debug.Log( "Object name: " + _hit.transform.name );
 
-                    Debug.DrawRay( _hit.point , _inDirection * 100 , Color.magenta );
-
-                    //打印被射线击中物体的名称
-                    Debug.Log( "Object name: " + _hit.transform.name );
-
-                    //如果反射次数为1
-                    if ( nReflections == 1 )
-                    {
-                        //给lineRenderer上新加一个点
-                        _lineRenderer.numPositions = ++_reflectPoint;
-                    }
-
-                    //将lineRenderer的下一个点的位置设置为击中点的位置  
-                    _lineRenderer.SetPosition( i + 1 , _hit.point );
-
-                }
-            }
-            else // 如果射线已经反射过至少一次
-            {
-                //检查射线是否碰到了墙壁
-                if ( Physics.Raycast( _ray.origin , _ray.direction , out _hit , 100 ) )//发射一条100个单位长的射线
-                {
-                    //反射方向就是当前碰撞点的反射角
-                    _inDirection = Vector3.Reflect( _inDirection , _hit.normal );
-
-                    //新建一条射线, 用刚才的碰撞点当做新射线的初始点，用反射方向当做他的发射方向  
-                    _ray = new Ray( _hit.point , _inDirection );
-
-                    //调试用信息，绘制法线、射线
-                    Debug.DrawRay( _hit.point , _hit.normal * 3 , Color.blue );
-
-                    Debug.DrawRay( _hit.point , _inDirection * 100 , Color.magenta );
-
-                    Debug.Log( "Object name: " + _hit.transform.name );
-
-
-                    //给lineRenderer上新加一个点
-                    _lineRenderer.numPositions = ++_reflectPoint;
-
-                    //将lineRenderer的下一个点的位置设置为击中点的位置  
-                    _lineRenderer.SetPosition( i + 1 , _hit.point );
-
-                }
+                //将下一个点位设置为碰撞点信息，Linerender做联线渲染
+                _lineRenderer.SetPosition( i + 1 , _hit.point );
             }
         }
     }
