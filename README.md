@@ -51,6 +51,8 @@ Use to build primary framework
 
 ### WordsShield 屏蔽字功能
 ---
+### GetBoxColliderWorldPosition 获取Box碰撞器所有碰撞点世界坐标
+---
 
 
  
