@@ -49,6 +49,8 @@ Use to build primary framework
 
 **Unity/Mono/**:*Monobehaviour功能代码*
 
+**Unity/HighlightingSystem/**:*物体高亮组件：直接挂载于需要高亮的物体上，通过flashn/flashoff开关*
+
 ### WordsShield 屏蔽字功能
 ---
 ### GetBoxColliderWorldPosition 获取Box碰撞器所有碰撞点世界坐标
