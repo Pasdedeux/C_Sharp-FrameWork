@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent( typeof( MeshFilter ) , typeof( MeshRenderer ) )]
-public class _Cube : MonoBehaviour
+public class L_Cube : MonoBehaviour
 {
     private float xLength = 2, yLength = 2, zLength = 2;
 
@@ -13,11 +13,11 @@ public class _Cube : MonoBehaviour
     private int xSize = 2, ySize = 2, zSize = 2;
 
     //每个顶点的实际间隔距离
-    private float _xUnit = 1, _yUnity = 1, _zUnit = 1;
+    private float _xUnit = 1, _yUnit = 1, _zUnit = 1;
 
     private void Awake( )
     {
-       
+       //应该写点什么，先放着吧。。。
     }
 
     public void Generate( float xLength, float yLength, float zLength )
@@ -27,11 +27,11 @@ public class _Cube : MonoBehaviour
         this.zLength = zLength;
 
         _xUnit = xLength / xSize;
-        _yUnity = yLength / ySize;
+        _yUnit = yLength / ySize;
         _zUnit = zLength / zSize;
 
         GetComponent<MeshFilter>().mesh = _mesh = new Mesh();
-        _mesh.name = "Procedural Cube";
+        _mesh.name = "Procedural L_Cube";
 
         CreateVertices();
         CreateTriangles();
@@ -41,11 +41,11 @@ public class _Cube : MonoBehaviour
     }
 
     /// <summary>
-    /// 与顶点不同，三角形的数量简单的等于组合的六个面的数量
+    /// 三角形的数量简单的等于组合的六个面的数量
     /// </summary>
     private void CreateTriangles( )
     {
-        //接下来两行需要着重理解
+        //接下来两行需要着重理解:代表面数及三角形数量
         int quads = ( xSize * ySize + xSize * zSize + ySize * zSize ) * 2;
         int[] triangles = new int[ quads * 6 ];
         int ring = ( xSize + zSize ) * 2;
@@ -79,8 +79,8 @@ public class _Cube : MonoBehaviour
         t = SetQuad( triangles , t , vMid , v + 2 , v , v + 1 );
 
         int vMin = ring - 1;
-        vMid -= xSize - 2;
         int vMax = v + 2;
+        vMid -= xSize - 2;
 
         for ( int z = 1 ; z < zSize - 1 ; z++, vMin--, vMid++, vMax++ )
         {
@@ -165,22 +165,22 @@ public class _Cube : MonoBehaviour
         {
             for ( int x = 0 ; x <= xSize ; x++ )
             {
-                _vertices[ v++ ] = new Vector3( x * _xUnit , y * _yUnity , 0 * _zUnit );
+                _vertices[ v++ ] = new Vector3( x * _xUnit , y * _yUnit , 0 * _zUnit );
             }
 
             for ( int z = 1 ; z <= zSize ; z++ )//不用z==0 因为起点已经有X
             {
-                _vertices[ v++ ] = new Vector3( xSize * _xUnit , y * _yUnity , z * _zUnit );
+                _vertices[ v++ ] = new Vector3( xSize * _xUnit , y * _yUnit , z * _zUnit );
             }
 
             for ( int x = xSize - 1 ; x >= 0 ; x-- )
             {
-                _vertices[ v++ ] = new Vector3( x * _xUnit , y * _yUnity , zSize * _zUnit );
+                _vertices[ v++ ] = new Vector3( x * _xUnit , y * _yUnit , zSize * _zUnit );
             }
 
             for ( int z = zSize - 1 ; z > 0 ; z-- )//不用z>=0 因为起点已经有X
             {
-                _vertices[ v++ ] = new Vector3( 0 * _xUnit , y * _yUnity , z * _zUnit );
+                _vertices[ v++ ] = new Vector3( 0 * _xUnit , y * _yUnit , z * _zUnit );
             }
         }
         //上下盖子中间面部分点
@@ -188,7 +188,7 @@ public class _Cube : MonoBehaviour
         {
             for ( int z = 1 ; z < zSize ; z++ )
             {
-                _vertices[ v++ ] = new Vector3( x * _xUnit , ySize * _yUnity , z * _zUnit );
+                _vertices[ v++ ] = new Vector3( x * _xUnit , ySize * _yUnit , z * _zUnit );
             }
         }
 
@@ -196,7 +196,7 @@ public class _Cube : MonoBehaviour
         {
             for ( int z = 1 ; z < zSize ; z++ )
             {
-                _vertices[ v++ ] = new Vector3( x * _xUnit , 0 * _yUnity , z * _zUnit );
+                _vertices[ v++ ] = new Vector3( x * _xUnit , 0 * _yUnit , z * _zUnit );
             }
         }
 

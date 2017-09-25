@@ -28,7 +28,7 @@ public class GenerateCubes : MonoBehaviour
                 for ( int z = 0 ; z < yNum ; z++ )
                 {
                     GameObject obj = Instantiate( prefabs );
-                    var sc = obj.GetComponent<_Cube>();
+                    var sc = obj.GetComponent<L_Cube>();
                     sc.Generate( xlength , ylength , zlength );
                     obj.transform.position = new Vector3( x * xlength , y * ylength , z * zlength ) + target.transform.position + new Vector3( -0.5f , -0.5f , -0.5f );
                     obj.AddComponent<BoxCollider>().size *= 2f;
