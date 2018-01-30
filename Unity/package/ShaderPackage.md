@@ -1,6 +1,8 @@
 ##Shader文档##
 
 ###卡通Shader###
+[原文Cartoon链接](http://blog.csdn.net/candycat1992/article/details/37882425/ "原文Cartoon链接")
+
 包含 3 个不同设置的卡通黑边描边效果:
 
 - Catoon：普通类型。
