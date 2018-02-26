@@ -1,5 +1,5 @@
 # C_Sharp-Framework #
-Use to build primary framework
+Use to build primary frameworks
 
 
 ### FSM 有限状态机 ###
